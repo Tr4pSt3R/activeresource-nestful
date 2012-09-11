@@ -38,8 +38,7 @@ module ActiveResource
         end
 
         def format
-	  class_attribute(:format) || ::Nestful::Formats::XmlFormat.new
-          #read_inheritable_attribute(:format) || ::Nestful::Formats::XmlFormat.new
+          read_inheritable_attribute(:format) || ::Nestful::Formats::XmlFormat.new
         end
 
         def connection(refresh = false)
