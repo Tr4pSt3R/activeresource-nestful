@@ -33,12 +33,17 @@ module ActiveResource
 
           format = format.new
 
-          write_inheritable_attribute(:format, format)
+          # write_inheritable_attribute(:format, format)
+          # "write_inheritable_attribute" has been removed from Rails 3.2.8. 
+          # So we write this instead:
+          class_attribute :format
+          self.attribute_name = format 
+
           connection.format = format if site
         end
 
         def format
-	  class_attribute(:format) || ::Nestful::Formats::XmlFormat.new
+	         class_attribute(:format) || ::Nestful::Formats::XmlFormat.new
           #read_inheritable_attribute(:format) || ::Nestful::Formats::XmlFormat.new
         end
 
